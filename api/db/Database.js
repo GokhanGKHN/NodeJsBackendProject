@@ -12,9 +12,22 @@ class Database {
     }
 
     async connect(options) {
-        let db = await mongoose.connect(options.CONNECTION_STRING);
-        this.mongoConnection =db;
+        
+        try {
+
+            console.log("DB Connecting...");
+            let db = await mongoose.connect(options.CONNECTION_STRING);
+            this.mongoConnection =db;
+            console.log("DB Connected.");
+            
+        } catch (err) {
+            console.error(err);
+            process.exit();
+            
+        }
+        
+        
     }
 }
 
-module.export = Database;
+module.exports = Database;
